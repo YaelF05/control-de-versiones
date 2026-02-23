@@ -31,4 +31,22 @@ public class Actividades {
         System.out.println();
     }
 
+    void eliminarTarea() {
+        if (tareas.isEmpty()) {
+            System.out.println("No hay tareas para eliminar.");
+            System.out.println();
+            return;
+        }
+        listarTareas();
+        System.out.print("Ingresa el número de la tarea a eliminar: ");
+        int numero = scanner.nextInt();
+        if (numero < 1 || numero > tareas.size()) {
+            System.out.println("Número inválido.");
+        } else {
+            String eliminada = tareas.remove(numero - 1);
+            System.out.println("Tarea eliminada: " + eliminada);
+        }
+        System.out.println();
+    }
+
 }

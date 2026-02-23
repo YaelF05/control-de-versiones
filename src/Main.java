@@ -10,7 +10,8 @@ public class Main {
         do {
             System.out.println("1. Agregar tarea");
             System.out.println("2. Listar tareas");
-            System.out.println("3. Salir");
+            System.out.println("3. Eliminar tarea");
+            System.out.println("4. Salir");
             System.out.print("Selecciona una opción: ");
 
             try {
@@ -28,12 +29,15 @@ public class Main {
                     t.listarTareas();
                     break;
                 case 3:
+                    t.eliminarTarea();
+                    break;
+                case 4:
                     System.out.println("Adios");
                     break;
                 default:
                     System.out.println("Opción no válida. Intenta de nuevo.");
             }
 
-        } while (opcion != 3);
+        } while (opcion != 4);
     }
 }
