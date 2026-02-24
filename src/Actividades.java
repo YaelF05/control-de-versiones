@@ -1,11 +1,17 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Actividades {
 
-    private List<Tarea> tareas = new ArrayList<>();
+    private List<Tarea> tareas;
     private Scanner scanner = new Scanner(System.in);
+    private TareaRepository repository;
+
+    // Inyección de dependencias a través del constructor (Clean Architecture)
+    public Actividades(TareaRepository repository) {
+        this.repository = repository;
+        this.tareas = repository.cargarTareas();
+    }
 
     public void agregarTarea() {
         System.out.print("Escribe la nueva tarea: ");
@@ -18,6 +24,7 @@ public class Actividades {
         }
 
         tareas.add(new Tarea(descripcion));
+        repository.guardarTareas(tareas); // Guardamos estado
         System.out.println("Tarea agregada: " + descripcion + "\n");
     }
 
@@ -50,6 +57,7 @@ public class Actividades {
                 System.out.println("Número inválido.\n");
             } else {
                 Tarea eliminada = tareas.remove(numero - 1);
+                repository.guardarTareas(tareas); // Guardamos estado
                 System.out.println("Tarea eliminada: " + eliminada.getDescripcion() + "\n");
             }
         } catch (NumberFormatException e) {
@@ -77,6 +85,7 @@ public class Actividades {
                     System.out.println("La tarea ya estaba completada.\n");
                 } else {
                     tarea.marcarComoCompletada();
+                    repository.guardarTareas(tareas); // Guardamos estado
                     System.out.println("Tarea marcada como completada: " + tarea.getDescripcion() + "\n");
                 }
             }

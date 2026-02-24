@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Actividades t = new Actividades();
+        TareaRepository repository = new CsvTareaRepository("tareas.csv");
+        Actividades t = new Actividades(repository);
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
 
